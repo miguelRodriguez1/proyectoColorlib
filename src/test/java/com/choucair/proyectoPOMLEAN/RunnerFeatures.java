@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.RunWith;
 
+import com.choucair.proyectoPOMLEAN.toolbox.FeatureOverright;
+
 import io.cucumber.junit.CucumberOptions;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import net.serenitybdd.cucumber.CucumberWithSerenity;
@@ -31,7 +33,7 @@ public class RunnerFeatures {
 			break;
 			
 		}
-		//FeatureOverright.overrideFeatureFiles("src/test/resources/features/maxtime");
+		FeatureOverright.overrideFeatureFiles("src/test/resources/features/proyectoPOMLEAN/Forms/");
 	}
 
 	@Test
@@ -40,7 +42,7 @@ public class RunnerFeatures {
 	}
 
 	@RunWith(CucumberWithSerenity.class)
-	@CucumberOptions(features = "src/test/resources/features/proyectoPOMLEAN/Forms/PopupValidation.feature", 
+	@CucumberOptions(features = "src/test/resources/features/proyectoPOMLEAN/Forms/proyectoPOMLEAN.feature", 
 			tags = "@Regresion" ,glue = "com.choucair.proyectoPOMLEAN.definition")
 	public class CRunnerPedido {
 

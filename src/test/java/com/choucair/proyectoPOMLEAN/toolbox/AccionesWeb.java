@@ -1,10 +1,8 @@
 package com.choucair.proyectoPOMLEAN.toolbox;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-
 import java.util.function.Function;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.JavascriptExecutor;
@@ -15,6 +13,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
+
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
 import net.serenitybdd.core.pages.PageObject;
@@ -23,6 +23,7 @@ import net.thucydides.core.util.EnvironmentVariables;
 
 public class AccionesWeb extends PageObject{
 	private String bordeRojo = "arguments[0].style.border='3px dashed red'";
+	private String bordeVerde = "arguments[0].style.border='3px dashed green'";
 	private String rellenoRojo = "arguments[0].style.color='red'";
 	private static final String WEBDRIVERTIMEOUT = "webdriver.timeouts.implicitlywait";
 	private EnvironmentVariables environmentVariables;
@@ -44,12 +45,26 @@ public class AccionesWeb extends PageObject{
 		WebElement webElemeBordear = find(By.xpath(strXptElemento));
 		((JavascriptExecutor) getDriver()).executeScript(bordeRojo, webElemeBordear);
 	}
-
 	/**
 	 * Este metodo crea un borde rojo sobre un elemento de la pagina
 	 * 
 	 * @param webElementFac Elemento que se bordeara
 	 */
+	
+	public void bordearElemento(WebElementFacade webElementFac,String color) {
+		
+		if(color.equals("Rojo")) {
+			((JavascriptExecutor) getDriver()).executeScript(bordeRojo, webElementFac);
+		}else if(color.equals("Verde")){
+			((JavascriptExecutor) getDriver()).executeScript(bordeVerde, webElementFac);
+		}
+	}
+	/**
+	 * Este metodo crea un borde rojo sobre un elemento de la pagina
+	 * 
+	 * @param webElementFac Elemento que se bordeara
+	 */
+	
 	public void bordearElemento(WebElementFacade webElementFac) {
 		((JavascriptExecutor) getDriver()).executeScript(bordeRojo, webElementFac);
 	}
@@ -112,6 +127,23 @@ public class AccionesWeb extends PageObject{
 			Serenity.takeScreenshot();
 	}
 
+	/**
+	 *extrer elemento de un text
+	 * 
+	 * @param wbeElement
+	 * @param blnBordearElemento
+	 * @param blnTomarScreenshot
+	 */
+	public String extrerTexto(By byElement, boolean blnBordearElemento, boolean blnTomarScreenshot) {
+		WebElementFacade wbeElement = element(byElement);
+		waitFor(wbeElement);
+		if (blnBordearElemento)
+			bordearElemento(wbeElement);
+		if (blnTomarScreenshot)
+			Serenity.takeScreenshot();
+		
+		return wbeElement.getText();
+	}
 	/**
 	 * Click de un elemento
 	 * 
@@ -382,6 +414,16 @@ public class AccionesWeb extends PageObject{
 		getDriver().close();
 		
 	}
+	/**
+	 * verifica si un elemento esta presente en la pagina
+	 * @param by localizador del elemento 
+	 */
+	public void verificarElementoPresente(By byElement) {
+		WebElementFacade wbeElement = element(byElement);
+		String strMensaje=extrerTexto(byElement, true, false);
+		assertThat(strMensaje,is("Popup Validation"));
+	}
+
 	}
 
 

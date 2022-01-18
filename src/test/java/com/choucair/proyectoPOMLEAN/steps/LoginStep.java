@@ -20,7 +20,6 @@ public class LoginStep {
 		accionWeb.sendKeys(LoginPageObjects.TXT_USUARIO, usuario ,true,false);
 		accionWeb.sendKeys(LoginPageObjects.TXT_CLAVE, clave ,true,false );
 		accionWeb.click(LoginPageObjects.BTN_INICIO, true,true );
-		
 	}
 
 }
