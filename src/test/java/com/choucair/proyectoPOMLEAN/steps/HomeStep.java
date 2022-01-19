@@ -19,6 +19,6 @@ public class HomeStep {
 	public void ingresar_form_validarion() {
 		accionWeb.click(HomePage.menu, true, false);
 		accionWeb.click(HomePage.menuFormValidation, true, false);
-		//accionWeb.verificarElementoPresente(HomePage.lblFormValidation);
+		accionWeb.verificartexto(HomePage.lblFormValidation,"Popup Validation");
 	}
 }

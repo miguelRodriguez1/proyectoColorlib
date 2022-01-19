@@ -30,19 +30,22 @@ Feature: Formulario Popup Validation
     Given Autentico en colorlib con usuario "demo" y clave "demo"
     And Ingreso a la funcionalidad Forms Validation
     When Diligencio formulario Popup Validation
-      | Required | Select | MultipleS1 | MultipleS2 | Url                   | Email            | Password1 | Password2 | MinSize | MaxSize | Number | IP          | Date       | DateEarlier | 
-      | valor1   | Golf   | Tennis     | Golf       | http://www.valor1.com | valor1@gmail.com | valor1    | valor1    |  123456 |  123456 | -99.99 | 200.200.5.4 | 2018-01-22 | 2012/09/12  | 
+      | Required | Select | MultipleS1 | MultipleS2 | Url                   | Email            | Password1 | Password2 | MinSize | MaxSize | Number | IP          | Date       | DateEarlier |
+      | valor1   | Golf   | Tennis     | Golf       | http://www.valor1.com | valor1@gmail.com | valor1    | valor1    |  123456 |  123456 | -99.99 | 200.200.5.4 | 2018-01-22 | 2012/09/12  |
     Then Verifico ingreso exitoso
 
   @CasoAlterno
-  Scenario: Diligenciamiento con errores del formulario Popup validation,
+  Scenario Outline: Diligenciamiento con errores del formulario Popup validation,
     			se presenta Globo informativo indicando error en el diligenciamiento de algun campo.
 
     Given Autentico en colorlib con usuario "demo" y clave "demo"
     And Ingreso a la funcionalidad Forms Validation
     When Diligencio formulario Popup Validation
-    | Required | Select | MultipleS1 | MultipleS2 | Url                   | Email            | Password1 | Password2 | MinSize | MaxSize | Number | IP          | Date       | DateEarlier |  
-    |					 | Golf   | Tennis     | Golf       | http://www.valor1.com | valor1@gmail.com | valor1    | valor1    |  123456 |  123456 | -99.99 | 200.200.5.4 | 2018-01-22 | 2012/09/12  |  
-    |valor1		 | Choose a sport   | Tennis     | golf       | http://www.valor1.com | valor1@gmail.com | valor1    | valor1    |  123456 |  123456 | -99.99 | 200.200.5.4 | 2018-01-22 | 2012/09/12 |
-   
+      | Required   | Select  | MultipleS1   | MultipleS2   | Url   | Email   | Password1   | Password2   | MinSize   | MaxSize   | Number   | IP   | Date   | DateEarlier   |
+      | <Required> | <Select> | <MultipleS1> | <MultipleS2> | <Url> | <Email> | <Password1> | <Password2> | <MinSize> | <MaxSize> | <Number> | <IP> | <Date> | <DateEarlier> |
     Then Verificar que se presenta Globo informativo de validacion
+
+    Examples: 
+      | Required | Select         | MultipleS1 | MultipleS2 | Url                   | Email            | Password1 | Password2 | MinSize | MaxSize | Number | IP          | Date       | DateEarlier |
+      |          | Golf           | Tennis     | Golf       | http://www.valor1.com | valor1@gmail.com | valor1    | valor1    |  123456 |  123456 | -99.99 | 200.200.5.4 | 2018-01-22 | 2012/09/12  |
+      | valor1   | Choose a sport | Tennis     | Golf       | http://www.valor1.com | valor1@gmail.com | valor1    | valor1    |  123456 |  123456 | -99.99 | 200.200.5.4 | 2018-01-22 | 2012/09/12  |

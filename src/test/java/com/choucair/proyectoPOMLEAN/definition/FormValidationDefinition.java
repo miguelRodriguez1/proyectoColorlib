@@ -27,13 +27,16 @@ public class FormValidationDefinition {
 			}
 		}
 	}
-	/*@Then("^Verifico ingreso exitoso$")
+	@Then("^Verifico ingreso exitoso$")
 	public void verifico_ingreso_exitoso() throws Exception {
 		formValidationStep.verificar_ingreso_datos_formulario_exitoso();
 	}
-	@Then("^Verificar que se presente Globo Informativo de validacion$")
-	public void verificar_que_se_presente_Globo_Informativo_de_validacion() throws Exception {
-		formValidationStep.verificar_ingreso_datos_formulario_con_errores();
-	}*/
+
+
+@Then("Verificar que se presenta Globo informativo de validacion")
+public void verificar_que_se_presenta_globo_informativo_de_validacion() {
+	formValidationStep.verificar_ingreso_datos_formulario_con_errores();
+}
+
 
 }

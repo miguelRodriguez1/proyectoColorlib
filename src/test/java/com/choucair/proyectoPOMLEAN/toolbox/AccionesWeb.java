@@ -13,15 +13,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
-
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
+import net.serenitybdd.screenplay.ensure.Ensure;
 import net.thucydides.core.util.EnvironmentVariables;
 
-public class AccionesWeb extends PageObject{
+public class AccionesWeb extends PageObject {
 	private String bordeRojo = "arguments[0].style.border='3px dashed red'";
 	private String bordeVerde = "arguments[0].style.border='3px dashed green'";
 	private String rellenoRojo = "arguments[0].style.color='red'";
@@ -45,26 +44,28 @@ public class AccionesWeb extends PageObject{
 		WebElement webElemeBordear = find(By.xpath(strXptElemento));
 		((JavascriptExecutor) getDriver()).executeScript(bordeRojo, webElemeBordear);
 	}
+
 	/**
 	 * Este metodo crea un borde rojo sobre un elemento de la pagina
 	 * 
 	 * @param webElementFac Elemento que se bordeara
 	 */
-	
-	public void bordearElemento(WebElementFacade webElementFac,String color) {
-		
-		if(color.equals("Rojo")) {
+
+	public void bordearElemento(WebElementFacade webElementFac, String color) {
+
+		if (color.equals("Rojo")) {
 			((JavascriptExecutor) getDriver()).executeScript(bordeRojo, webElementFac);
-		}else if(color.equals("Verde")){
+		} else if (color.equals("Verde")) {
 			((JavascriptExecutor) getDriver()).executeScript(bordeVerde, webElementFac);
 		}
 	}
+
 	/**
 	 * Este metodo crea un borde rojo sobre un elemento de la pagina
 	 * 
 	 * @param webElementFac Elemento que se bordeara
 	 */
-	
+
 	public void bordearElemento(WebElementFacade webElementFac) {
 		((JavascriptExecutor) getDriver()).executeScript(bordeRojo, webElementFac);
 	}
@@ -128,7 +129,7 @@ public class AccionesWeb extends PageObject{
 	}
 
 	/**
-	 *extrer elemento de un text
+	 * extrer elemento de un text
 	 * 
 	 * @param wbeElement
 	 * @param blnBordearElemento
@@ -141,9 +142,10 @@ public class AccionesWeb extends PageObject{
 			bordearElemento(wbeElement);
 		if (blnTomarScreenshot)
 			Serenity.takeScreenshot();
-		
+
 		return wbeElement.getText();
 	}
+
 	/**
 	 * Click de un elemento
 	 * 
@@ -177,8 +179,7 @@ public class AccionesWeb extends PageObject{
 		wbeElement.click();
 	}
 
-	public void typeAndTab(By byElement, String strValor, boolean blnBordearElemento,
-			boolean blnTomarScreenshot) {
+	public void typeAndTab(By byElement, String strValor, boolean blnBordearElemento, boolean blnTomarScreenshot) {
 		WebElementFacade wbeElement = element(byElement);
 		waitFor(wbeElement);
 		wbeElement.typeAndTab(strValor);
@@ -259,7 +260,7 @@ public class AccionesWeb extends PageObject{
 	public void cambioDeFrame(int frame) {
 		getDriver().switchTo().frame(frame);
 	}
-	
+
 	/**
 	 * Metodo de cambio de frame segun el numero del frame
 	 * 
@@ -324,7 +325,7 @@ public class AccionesWeb extends PageObject{
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Este metodo espera a que un elemento este presente en la pagina
 	 * 
@@ -349,7 +350,7 @@ public class AccionesWeb extends PageObject{
 		new WebDriverWait(getDriver(), intTimer).until((ExpectedCondition<Boolean>) wd -> ((JavascriptExecutor) wd)
 				.executeScript("return document.readyState").equals("complete"));
 	}
-	
+
 	/**
 	 * Metodo de esperar tiempo en segundos
 	 * 
@@ -369,18 +370,19 @@ public class AccionesWeb extends PageObject{
 				.parseInt(EnvironmentSpecificConfiguration.from(environmentVariables).getProperty(WEBDRIVERTIMEOUT)))
 				/ 1000;
 	}
-	
+
 	/**
-	 * Selecciona una opcion de una un objeto lista desplegable 
+	 * Selecciona una opcion de una un objeto lista desplegable
+	 * 
 	 * @param byPadre localizador de la lista deplegable
-	 * @param byHijo localizador del objeto hijo o opcion de la lista
+	 * @param byHijo  localizador del objeto hijo o opcion de la lista
 	 */
 	public void seleccionarLista(By byPadre, By byHijo) {
 		WebElementFacade wbeElPadre = element(byPadre);
 		WebElementFacade wbeElHijo = element(byHijo);
 		esperoElementoClickable(byPadre);
 		wbeElPadre.click();
-		wbeElPadre.click();
+		//wbeElPadre.click();
 		esperoElementoPresente(byHijo);
 		esperoElementoVisible(byHijo);
 		esperoElementoClickable(byHijo);
@@ -390,10 +392,12 @@ public class AccionesWeb extends PageObject{
 	public void verificarBusqueda(WebElementFacade webElemento) throws Exception {
 		// try {
 		assertThat(webElemento.isCurrentlyVisible(), is(true));
-		
-		 /*if (!webElemento.isCurrentlyVisible()) throw new Exception("Error");
-		 throw new Exception("No cargo");*/
-		 
+
+		/*
+		 * if (!webElemento.isCurrentlyVisible()) throw new Exception("Error"); throw
+		 * new Exception("No cargo");
+		 */
+
 		// Serenity.takeScreenshot();
 		Serenity.setSessionVariable("Estado").to("SUCCESS");
 		/*
@@ -404,26 +408,31 @@ public class AccionesWeb extends PageObject{
 		 */
 		// Serenity.takeScreenshot();
 	}
-	
-	
-	
+
 	/**
-	 * Método que cierra la página actualmente abierta  
+	 * Método que cierra la página actualmente abierta
 	 */
 	public void cerrarPagina() {
 		getDriver().close();
-		
+
 	}
+
 	/**
 	 * verifica si un elemento esta presente en la pagina
-	 * @param by localizador del elemento 
+	 * 
+	 * @param by localizador del elemento
 	 */
 	public void verificarElementoPresente(By byElement) {
-		WebElementFacade wbeElement = element(byElement);
-		String strMensaje=extrerTexto(byElement, true, false);
-		assertThat(strMensaje,is("Popup Validation"));
+
+		String strMensaje = extrerTexto(byElement, true, false);
+		assertThat(strMensaje, is("Popup Validation"));
 	}
 
+	public void verificartexto(By element, String strTextoAComparar) {
+		Ensure.that(element).text().isEqualTo(strTextoAComparar);
 	}
 
-
+	public void verificarelementovisible(By element) {
+		Ensure.that(element).isDisplayed();
+	}
+}

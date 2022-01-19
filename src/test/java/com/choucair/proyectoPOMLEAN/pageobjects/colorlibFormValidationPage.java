@@ -1,20 +1,23 @@
 package com.choucair.proyectoPOMLEAN.pageobjects;
 import org.openqa.selenium.By;
 public class colorlibFormValidationPage {
-	public static final By txtRequired =  By.xpath("//*[@id='req']");
+	public static final By lnlValidation=By.xpath("(//H5)[2]");
+	public static final By txtRequired =  By.xpath("//input[@id='req']");
 	public static By BTN_HIJO_TIPO_HORA =  By.xpath("//option[text()='REEMPLAZAR']");
-	public static final By cmbSport1 =  By.xpath("//*[@id='sport']");
-	public static final By txtUrl1 =  By.xpath("//*[@id='url1']");
-	public static final By txtEmail1 =  By.xpath("//*[@id='email1']");
-	public static final By txtPass1 =  By.xpath("//*[@id='pass1']");
-	public static final By txtPass2 =  By.xpath("//*[@id='pass2']");
-	public static final By txtMinsize =  By.xpath("//*[@id='minsize1']");
-	public static final By txtMaxsize =  By.xpath("//*[@id='maxsize1']");
-	public static final By txtNumber =  By.xpath("//*[@id='number2']");
-	public static final By txtIp =  By.xpath("//*[@id='ip']");
-	public static final By txtDate =  By.xpath("//*[@id='date3']");
-	public static final By txtDateEarlier =  By.xpath("//*[@id='past']");
-	public static final By cmbSport2 =  By.xpath("//*[@id='sport2']");
+	public static final By cmbSport1 =  By.xpath("//select[@id='sport']");
+	public static final By txtUrl1 =  By.xpath("//input[@id='url1']");
+	public static final By txtEmail1 =  By.xpath("//input[@id='email1']");
+	public static final By txtPass1 =  By.xpath("//input[@id='pass1']");
+	public static final By txtPass2 =  By.xpath("//input[@id='pass2']");
+	public static final By txtMinsize =  By.xpath("//input[@id='minsize1']");
+	public static final By txtMaxsize =  By.xpath("//input[@id='maxsize1']");
+	public static final By txtNumber =  By.xpath("//input[@id='number2']");
+	public static final By txtIp =  By.xpath("//input[@id='ip']");
+	public static final By txtDate =  By.xpath("//input[@id='date3']");
+	public static final By txtDateEarlier =  By.xpath("//input[@id='past']");
+	public static final By cmbSport2 =  By.xpath("//select[@id='sport2']");
+	
+	
 	public static By btnValidate =  By.xpath("//*[@id='popup-validation']/div[14]/input");
 	public static final By globoInformativo =  By.xpath("(//DIV[@class='formErrorContent'])[1]");
 	public static By setLS_HIJO_TIPO_DEPORTE(String strTextoReemplazar) {
