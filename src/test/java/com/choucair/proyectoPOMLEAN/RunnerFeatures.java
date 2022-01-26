@@ -42,7 +42,7 @@ public class RunnerFeatures {
 	}
 
 	@RunWith(CucumberWithSerenity.class)
-	@CucumberOptions(features = "src/test/resources/features/proyectoPOMLEAN/Forms/proyectoPOMLEAN.feature", 
+	@CucumberOptions(features = "src/test/resources/features/proyectoPOMLEAN/Forms/colorLib.feature", 
 			tags = "@CasoAlterno" ,glue = "com.choucair.proyectoPOMLEAN.definition")
 	public class CRunnerPedido {
 

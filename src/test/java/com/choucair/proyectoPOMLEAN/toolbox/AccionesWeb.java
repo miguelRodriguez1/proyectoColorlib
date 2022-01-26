@@ -2,6 +2,11 @@ package com.choucair.proyectoPOMLEAN.toolbox;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.function.Function;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptException;
@@ -382,7 +387,7 @@ public class AccionesWeb extends PageObject {
 		WebElementFacade wbeElHijo = element(byHijo);
 		esperoElementoClickable(byPadre);
 		wbeElPadre.click();
-		//wbeElPadre.click();
+		// wbeElPadre.click();
 		esperoElementoPresente(byHijo);
 		esperoElementoVisible(byHijo);
 		esperoElementoClickable(byHijo);
@@ -435,4 +440,42 @@ public class AccionesWeb extends PageObject {
 	public void verificarelementovisible(By element) {
 		Ensure.that(element).isDisplayed();
 	}
+
+	public void verificarFecha(By element) {
+		LocalDate firstOfJanuary = LocalDate.of(1900, 1, 1);
+		  Ensure.that(element)
+          .value()
+          .asADate()
+          .isAfter(firstOfJanuary);
+	}
+	public boolean verificarFecha2(String fecha) {
+		LocalDate firstOfJanuary = LocalDate.of(1900, 1, 1);
+		if(LocalDate.parse(fecha).isAfter(firstOfJanuary)) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	public void verificarYear(By element) {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		LocalDate fechaMin= LocalDate.parse("1900-01-01");
+		LocalDate fechaMax= LocalDate.parse(dtf.format(LocalDateTime.now()));
+		Ensure.that(element).value().asADate().isBetween(fechaMin, fechaMax);
+	}
+	public boolean verificarNumero(By element) {
+		//Ensure.that(element).value().asAnInteger().isBetween(-99, 99);
+		String num= extrerTexto(element, true, false);
+		double numero= Double.parseDouble(num);
+		if(-99 <numero) {
+			if(numero<99) {
+				return true;
+			}else {
+				return false;
+			}
+		}else {
+			return false;
+		}
+		
+	}
+	
 }

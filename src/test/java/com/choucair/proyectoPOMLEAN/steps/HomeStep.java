@@ -21,4 +21,8 @@ public class HomeStep {
 		accionWeb.click(HomePage.menuFormValidation, true, false);
 		accionWeb.verificartexto(HomePage.lblFormValidation,"Popup Validation");
 	}
+	@Step
+	public void ingresar_tablas() {
+		accionWeb.click(HomePage.lblTables, true, false);
+	}
 }

@@ -21,5 +21,5 @@ public class HomePage extends PageObject{
 	public static final By menuFormGenerals =By.xpath("//*[@id='menu']/li[6]/ul/li[1]/a");
 	public static final By menuFormValidation =By.xpath("//*[@id='menu']/li[6]/ul/li[2]/a");
 	public static final By lblFormValidation =By.xpath("//*[@id='content']/div/div/div[1]/div/div/header/h5");
-	
+	public static final By lblTables=By.xpath("//SPAN[@class='link-title'][text()='Tables']");
 }
